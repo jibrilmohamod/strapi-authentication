@@ -1,7 +1,6 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
 import strapi from "../strapi/strapi"
-import axios from "axios"
 
 export const useProductStore = defineStore("product", {
  state: () => ({

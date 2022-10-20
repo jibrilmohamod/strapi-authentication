@@ -55,7 +55,7 @@
         <div
           class="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-y-12 lg:gap-x-8 sm:gap-y-10 sm:gap-x-6 gap-y-6 lg:mt-12 mt-10"
         >
-          <div class="relative">
+          <div class="relative" v-for="(product, index) in store.products" :key="index">
             <div class="absolute top-0 left-0 py-2 px-4 bg-white bg-opacity-50">
               <p class="text-xs leading-3 text-gray-800">New</p>
             </div>
@@ -82,7 +82,7 @@
               </div>
             </div>
             <p class="font-normal text-xl leading-5 text-gray-800 md:mt-6 mt-4">
-              Wilfred Alana Dress
+              {{ product }}
             </p>
             <p class="font-semibold text-xl leading-5 text-gray-800 mt-4">$1550</p>
             <p class="font-normal text-base leading-4 text-gray-600 mt-4">2 colours</p>
@@ -96,7 +96,6 @@
             Load More
           </button>
         </div>
-        {{ store.products }}
       </div>
     </div>
   </body>
