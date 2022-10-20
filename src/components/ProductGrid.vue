@@ -82,9 +82,11 @@
               </div>
             </div>
             <p class="font-normal text-xl leading-5 text-gray-800 md:mt-6 mt-4">
-              {{ product }}
+              {{ product.attributes.title }}
             </p>
-            <p class="font-semibold text-xl leading-5 text-gray-800 mt-4">$1550</p>
+            <p class="font-semibold text-xl leading-5 text-gray-800 mt-4">
+              {{ `$${product.attributes.price}` }}
+            </p>
             <p class="font-normal text-base leading-4 text-gray-600 mt-4">2 colours</p>
           </div>
         </div>
@@ -97,6 +99,7 @@
           </button>
         </div>
       </div>
+      {{ store.products }}
     </div>
   </body>
 </template>
