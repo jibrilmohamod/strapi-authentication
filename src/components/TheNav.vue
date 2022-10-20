@@ -1,5 +1,5 @@
 <template>
- <body style="height: 600px">
+ <body>
   <div class="dark:bg-gray-900">
    <div>
     <div class="relative">

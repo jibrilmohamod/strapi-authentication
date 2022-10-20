@@ -5,7 +5,7 @@
 
 <template>
  <header>
-  <div class="wrapper">
+  <div>
    <TheNav />
   </div>
  </header>

@@ -1,5 +1,9 @@
-<script setup></script>
+<script setup>
+ import ProductGrid from "../components/ProductGrid.vue"
+</script>
 
 <template>
- <main></main>
+ <main>
+  <ProductGrid class="border border-green-400" />
+ </main>
 </template>
