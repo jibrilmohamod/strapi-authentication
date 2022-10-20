@@ -17,6 +17,7 @@ export const useProductStore = defineStore("product", {
       start: 0,
       limit: 10,
      },
+     populate: ["image"],
     })
     .then((response) => {
      this.products = response.data
