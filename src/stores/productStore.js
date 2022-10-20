@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
-import axios from "axios"
+import strapi from "../strapi/strapi"
 export const useProductStore = defineStore("productStore", {
  state: () => ({
   products: ref([]),
@@ -11,11 +11,12 @@ export const useProductStore = defineStore("productStore", {
  },
  actions: {
   fetchAll: async () => {
-   await axios
-    .get("https://api.escuelajs.co/api/v1/products?offset=0&limit=10")
-    .then((response) => {
-     this.products = response.data
-    })
+   await strapi.find("products", {
+    pagination: {
+     page: 1,
+     limit: 10,
+    },
+   })
   },
  },
 })
