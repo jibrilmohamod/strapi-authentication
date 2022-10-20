@@ -10,8 +10,12 @@ export const useProductStore = defineStore("productStore", {
   getAll() {},
  },
  actions: {
-     fetchAll: async () => {
-         await 
+  fetchAll: async () => {
+   await axios
+    .get("https://api.escuelajs.co/api/v1/products?offset=0&limit=10")
+    .then((response) => {
+     this.products = response.data
+    })
   },
  },
 })
