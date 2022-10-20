@@ -65,9 +65,10 @@
               ></div>
               <img
                 class="w-full"
-                src="https://i.ibb.co/HqmJYgW/gs-Kd-Pc-Iye-Gg.png"
+                :src="`http://localhost:1337${product.attributes.image.data.attributes.url}`"
                 alt="A girl Posing Image"
               />
+              {{ product.attributes.image.data.attributes.url }}
               <div class="absolute bottom-0 p-8 w-full opacity-0 group-hover:opacity-100">
                 <button
                   class="font-medium text-base leading-4 text-gray-800 bg-white py-3 w-full"

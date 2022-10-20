@@ -15,7 +15,7 @@ export const useProductStore = defineStore("product", {
     .find("products", {
      pagination: {
       start: 0,
-      limit: 10,
+      limit: 12,
      },
      populate: ["image"],
     })
