@@ -6,10 +6,24 @@ export const useCartStore = defineStore("cart", {
   cart: ref([]),
   loading: ref(false),
   error: ref(null),
+  count: ref(0),
  }),
+ getters: {
+  cartCount() {
+   return this.cart.length
+  },
+ },
  actions: {
-  async addToCart(product) {
-   this.cart.push(product)
+  async addToCart(count, product) {
+   for (let i = 0; i < count; i++) {
+    this.cart.push({ ...product })
+   }
+  },
+  increment() {
+   this.count++
+  },
+  decrement() {
+   this.count--
   },
  },
 })

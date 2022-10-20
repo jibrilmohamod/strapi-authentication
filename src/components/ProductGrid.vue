@@ -72,9 +72,9 @@
               <div class="absolute bottom-0 p-8 w-full opacity-0 group-hover:opacity-100">
                 <button
                   class="font-medium text-base leading-4 text-gray-800 bg-white py-3 w-full"
-                  @click="addToCart(product)"
+                  @click="addToCart(7, product)"
                 >
-                  Add to bag
+                  Add to cart
                 </button>
                 <button
                   class="bg-transparent font-medium text-base leading-4 border-2 border-white py-3 w-full mt-2 text-white"
@@ -89,7 +89,48 @@
             <p class="font-semibold text-xl leading-5 text-gray-800 mt-4">
               {{ `$${product.attributes.price}` }}
             </p>
-            <p class="font-normal text-base leading-4 text-gray-600 mt-4">2 colours</p>
+            <p class="font-normal text-base leading-4 text-gray-600 mt-4">
+              <!-- product count -->
+              <button @click="cart.increment()">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 13H5"
+                    stroke="#1F2937"
+                    stroke-miterlimit="10"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M12 20V4"
+                    stroke="#1F2937"
+                    stroke-miterlimit="10"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <span class="mx-2 text-lg">{{ cart.count }}</span>
+              <button @click="cart.decrement()">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 13H5"
+                    stroke="#1F2937"
+                    stroke-miterlimit="10"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </p>
           </div>
         </div>
 
@@ -115,12 +156,11 @@ import { useToast } from "vue-toastification";
 const store = useProductStore();
 const cart = useCartStore();
 const toast = useToast();
-const showToast = () => {
-  toast.success("Added to cart");
-};
+
 //add to cart
-const addToCart = (product) => {
-  cart.addToCart(product);
+const addToCart = (count, product) => {
+  cart.addToCart(count, product);
+  toast.success("Product added to cart");
 };
 
 onMounted(() => {
