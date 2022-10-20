@@ -96,15 +96,21 @@
             Load More
           </button>
         </div>
+        {{ store.products }}
       </div>
     </div>
   </body>
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import { useProductStore } from "../stores/productStore";
 
 const store = useProductStore();
+
+onMounted(() => {
+  store.getProducts();
+});
 </script>
 
 <style scoped></style>
