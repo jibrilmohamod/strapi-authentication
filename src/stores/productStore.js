@@ -12,9 +12,16 @@ export const useProductStore = defineStore("product", {
  }),
  actions: {
   async getProducts() {
-   await strapi.request("get", "/products").then((response) => {
-    this.products = response.data
-   })
+   await strapi
+    .find("products", {
+     pagination: {
+      start: 0,
+      limit: 10,
+     },
+    })
+    .then((response) => {
+     this.products = response.data
+    })
   },
  },
 })
