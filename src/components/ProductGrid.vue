@@ -48,7 +48,7 @@
           <p
             class="cursor-pointer hover:underline duration-100 font-normal text-base leading-4 text-gray-600"
           >
-            Showing 18 products
+            Showing {{ store.products.length }} results
           </p>
         </div>
 
@@ -72,6 +72,7 @@
               <div class="absolute bottom-0 p-8 w-full opacity-0 group-hover:opacity-100">
                 <button
                   class="font-medium text-base leading-4 text-gray-800 bg-white py-3 w-full"
+                  @click="addToCart(product)"
                 >
                   Add to bag
                 </button>
@@ -101,14 +102,26 @@
         </div>
       </div>
     </div>
+    <button @click="showToast()">toast</button>
   </body>
 </template>
 
 <script setup>
 import { onMounted } from "vue";
 import { useProductStore } from "../stores/productStore";
+import { useCartStore } from "../stores/cart";
+import { useToast } from "vue-toastification";
 
 const store = useProductStore();
+const cart = useCartStore();
+const toast = useToast();
+const showToast = () => {
+  toast.success("Added to cart");
+};
+//add to cart
+const addToCart = (product) => {
+  cart.addToCart(product);
+};
 
 onMounted(() => {
   store.getProducts();
