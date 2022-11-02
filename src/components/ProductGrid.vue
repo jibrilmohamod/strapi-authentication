@@ -56,81 +56,11 @@
           class="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-y-12 lg:gap-x-8 sm:gap-y-10 sm:gap-x-6 gap-y-6 lg:mt-12 mt-10"
         >
           <div class="relative" v-for="(product, index) in store.products" :key="index">
-            <div class="absolute top-0 left-0 py-2 px-4 bg-white bg-opacity-50">
-              <p class="text-xs leading-3 text-gray-800">New</p>
-            </div>
-            <div class="relative group">
-              <div
-                class="flex justify-center items-center opacity-0 bg-gradient-to-t from-gray-800 via-gray-800 to-opacity-30 group-hover:opacity-50 absolute top-0 left-0 h-full w-full"
-              ></div>
-              <img
-                class="w-full"
-                :src="`http://localhost:1337${product.attributes.image.data.attributes.url}`"
-                alt="A girl Posing Image"
-              />
-
-              <div class="absolute bottom-0 p-8 w-full opacity-0 group-hover:opacity-100">
-                <button
-                  class="font-medium text-base leading-4 text-gray-800 bg-white py-3 w-full"
-                  @click="addToCart(7, product)"
-                >
-                  Add to cart
-                </button>
-                <button
-                  class="bg-transparent font-medium text-base leading-4 border-2 border-white py-3 w-full mt-2 text-white"
-                >
-                  Quick View
-                </button>
-              </div>
-            </div>
-            <p class="font-normal text-xl leading-5 text-gray-800 md:mt-6 mt-4">
-              {{ product.attributes.title }}
-            </p>
-            <p class="font-semibold text-xl leading-5 text-gray-800 mt-4">
-              {{ `$${product.attributes.price}` }}
-            </p>
-            <p class="font-normal text-base leading-4 text-gray-600 mt-4">
-              <!-- product count -->
-              <button @click="cart.increment()">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M19 13H5"
-                    stroke="#1F2937"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M12 20V4"
-                    stroke="#1F2937"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </button>
-              <span class="mx-2 text-lg">{{ cart.count }}</span>
-              <button @click="cart.decrement()">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M19 13H5"
-                    stroke="#1F2937"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </button>
-            </p>
+            <productCard
+              :title="product.attributes.title"
+              :price="product.attributes.price"
+              :image="`http://localhost:1337${product.attributes.image.data.attributes.url}`"
+            />
           </div>
         </div>
 
@@ -148,10 +78,11 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { useProductStore } from "../stores/productStore";
 import { useCartStore } from "../stores/cart";
 import { useToast } from "vue-toastification";
+import productCard from "./productCard.vue";
 
 const store = useProductStore();
 const cart = useCartStore();
@@ -161,6 +92,16 @@ const toast = useToast();
 const addToCart = (count, product) => {
   cart.addToCart(count, product);
   toast.success("Product added to cart");
+};
+const count = ref(0);
+
+const increment = () => {
+  count.value++;
+};
+const decrement = () => {
+  if (count.value > 0) {
+    count.value--;
+  }
 };
 
 onMounted(() => {

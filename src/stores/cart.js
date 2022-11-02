@@ -17,6 +17,7 @@ export const useCartStore = defineStore("cart", {
   async addToCart(count, product) {
    for (let i = 0; i < count; i++) {
     this.cart.push({ ...product })
+    this.count = 0
    }
   },
   increment() {
